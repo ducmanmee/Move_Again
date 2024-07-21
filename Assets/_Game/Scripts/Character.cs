@@ -12,8 +12,19 @@ public class Character : MonoBehaviour
 
     private Character target;
     public Character Target => target;
-    public CharacterSight sightCharacter; 
+    public CharacterSight sightCharacter;
 
+    [SerializeField] WeaponSODatas weaponSODatas;
+    WeaponBase curWeapon;
+    WeaponType curWeaponType;
+    [SerializeField] Transform weaponHolder;
+
+    [SerializeField] Transform attackPoint;
+
+    private void Start()
+    {
+        OnInit();
+    }
 
     public virtual void OnInit() 
     { 
@@ -44,11 +55,17 @@ public class Character : MonoBehaviour
 
     }
 
-    /*public void ChangeWeapon(WeaponType weaponType)
+    public void ChangeWeapon(WeaponType weaponType)
     {
+        curWeaponType = weaponType;
+        if(curWeapon != null)
+        {
+            Destroy(curWeapon.gameObject);
+        }
 
-    }*/ 
-        
+        curWeapon = Instantiate(weaponSODatas.GetPrefab(weaponType), weaponHolder);        
+    }
+
     public virtual void OnHit(int damage)
     {
 
@@ -71,12 +88,15 @@ public class Character : MonoBehaviour
     
     public virtual void Attack()
     {
-        
+        ChangeAnim(Constain.ANIM_ATTACK);
+        this.transform.LookAt(Target.transform);
+        StartCoroutine(ThrowWeapon(curWeaponType));
     } 
     
-    public virtual void ThrowWeapon()
+    IEnumerator ThrowWeapon(WeaponType weaponType)
     {
-
+        yield return new WaitForSeconds(.4f);
+        weaponSODatas.GetBulletPrefab(weaponType);
     } 
 
         

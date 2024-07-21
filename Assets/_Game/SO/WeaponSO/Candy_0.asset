@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 740df78c05ea19b42bf1185364b10620, type: 3}
+  m_Name: Candy_0
+  m_EditorClassIdentifier: 
+  weaponPrefab: {fileID: -7490045534274917303, guid: 42929754c488d044a9a259ffa0b9b203, type: 3}
+  weaponType: 5
+  bulletPrefab: {fileID: -2097246768763873683, guid: 1eed52076483ced488755c6f9d18cc3f, type: 3}
+  weaponName: Watermelon
+  priceWeapon: 1200
+  damage: 0
+  speed: 0

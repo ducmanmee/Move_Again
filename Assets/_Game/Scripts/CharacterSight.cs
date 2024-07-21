@@ -24,14 +24,14 @@ public class CharacterSight : Singleton<CharacterSight>
         }
     }
 
-    public Character GetNearestTarget(Transform playerTransform)
+    public Character GetNearestTarget(Transform TF)
     {
         Character nearestTarget = null;
         float minDistance = float.MaxValue;
 
         foreach (Character target in targets)
         {
-            float distance = Vector3.Distance(playerTransform.position, target.transform.position);
+            float distance = Vector3.Distance(TF.position, target.transform.position);
             if (distance < minDistance)
             {
                 minDistance = distance;

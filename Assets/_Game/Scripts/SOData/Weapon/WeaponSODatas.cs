@@ -7,32 +7,44 @@ using UnityEngine;
 
 public class WeaponSODatas : ScriptableObject
 {
-    [SerializeField] WeaponSOData[] datas;
+    [SerializeField] WeaponSOData[] weaponDatas;
 
     public WeaponBase GetPrefab(WeaponType type)
     {
-        for (int i = 0; i < datas.Length; i++)
+        for (int i = 0; i < weaponDatas.Length; i++)
         {
-            if (datas[i].weaponType == type)
+            if (weaponDatas[i].weaponType == type)
             {
-                return datas[i].weaponPrefab;
+                return weaponDatas[i].weaponPrefab;
             }
         }
         return null;
     }
 
-    public int GetWeaponCount() => datas.Length;
+    public int GetWeaponCount() => weaponDatas.Length;
 
     public int GetPriceWeapon(WeaponType type)
     {
-        for (int i = 0; i < datas.Length; i++)
+        for (int i = 0; i < weaponDatas.Length; i++)
         {
-            if (datas[i].weaponType == type)
+            if (weaponDatas[i].weaponType == type)
             {
-                return datas[i].priceWeapon;
+                return weaponDatas[i].priceWeapon;
             }
         }
         return -1;
+    }
+
+    public BulletBase GetBulletPrefab(WeaponType type)
+    {
+        for (int i = 0; i < weaponDatas.Length; i++)
+        {
+            if (weaponDatas[i].weaponType == type)
+            {
+                return weaponDatas[i].bulletPrefab;
+            }
+        }
+        return null;
     }
 }
 

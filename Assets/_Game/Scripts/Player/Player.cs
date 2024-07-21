@@ -55,6 +55,7 @@ public class Player : Character
     public override void OnInit()
     {
         base.OnInit();
+        ChangeWeapon(WeaponType.Candy_Yellow);
     }
 
     public override void Move()
@@ -69,6 +70,7 @@ public class Player : Character
         {
             isMoving = false;
             SetTargetCharacter(sightCharacter.GetNearestTarget(this.transform));
+
             if (Target != null)
             {
                 ChangeState(new PAttackState());
@@ -83,7 +85,5 @@ public class Player : Character
     public override void Attack()
     {
         base.Attack();
-        ChangeAnim(Constain.ANIM_ATTACK);
-        this.transform.LookAt(Target.transform);
     }
 }

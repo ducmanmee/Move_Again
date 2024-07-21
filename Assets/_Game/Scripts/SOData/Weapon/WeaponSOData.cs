@@ -8,6 +8,7 @@ public class WeaponSOData : ScriptableObject
 {
     public WeaponBase weaponPrefab;
     public WeaponType weaponType;
+    public BulletBase bulletPrefab;
 
     [Header("Weapon Name")]
     public string weaponName;
