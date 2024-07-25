@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 740df78c05ea19b42bf1185364b10620, type: 3}
-  m_Name: Uzi
+  m_Name: uzi
   m_EditorClassIdentifier: 
   weaponPrefab: {fileID: 4358684695923705847, guid: b16aa3d472a2b43488efd6b37194911f, type: 3}
-  weaponType: 11
-  bulletPrefab: {fileID: -9171915275723865062, guid: 2dec75d29a10a1f4d822485a85975163, type: 3}
+  weaponType: 110
+  weaponShop: {fileID: -4685834763969476465, guid: f31b110a69dc265419c1bafcad25de3a, type: 3}
   weaponName: Uzi
-  priceWeapon: 3000
+  priceWeapon: 4200
   damage: 0
   speed: 0

@@ -8,7 +8,9 @@ public class Character : MonoBehaviour
     public Animator animCharacter;
 
     bool isDead;
-    public bool IsDead() => isDead;
+    
+    public bool isMoving;
+
 
     private Character target;
     public Character Target => target;
@@ -21,14 +23,19 @@ public class Character : MonoBehaviour
 
     [SerializeField] Transform attackPoint;
 
+    public float delayAttackTimer;
+    float attackRange = 5.5f;
+    public float AttackRange() => attackRange;
+
     private void Start()
     {
         OnInit();
     }
 
     public virtual void OnInit() 
-    { 
-
+    {
+        isDead = false;
+        sightCharacter.ClearCInRange();
     }
     public virtual void OnDespawn()
     {
@@ -63,7 +70,7 @@ public class Character : MonoBehaviour
             Destroy(curWeapon.gameObject);
         }
 
-        curWeapon = Instantiate(weaponSODatas.GetPrefab(weaponType), weaponHolder);        
+        curWeapon = Instantiate(weaponSODatas.GetPrefab(weaponType), weaponHolder);
     }
 
     public virtual void OnHit(int damage)
@@ -73,7 +80,8 @@ public class Character : MonoBehaviour
 
     public virtual void OnDeath()
     {
-
+        isDead = true;
+        ChangeAnim(Constain.ANIM_DEAD);
     }
 
     public virtual void SetSize(float size)
@@ -88,16 +96,39 @@ public class Character : MonoBehaviour
     
     public virtual void Attack()
     {
+        if(target.isDead)
+        {
+            sightCharacter.RemoveCInRange(target);
+            return;
+        }    
+        transform.LookAt(target.transform);
         ChangeAnim(Constain.ANIM_ATTACK);
-        this.transform.LookAt(Target.transform);
         StartCoroutine(ThrowWeapon(curWeaponType));
-    } 
-    
+    }
+
     IEnumerator ThrowWeapon(WeaponType weaponType)
     {
+        yield return Cache.GetWFS(.4f);
+        if (!isMoving && !isDead)
+        {
+            if(Target != null)
+            {
+                transform.LookAt(target.transform);
+                BulletBase B = SimplePool.Spawn<BulletBase>((PoolType)DataManager.ins.dt.idWeapon, attackPoint.position, attackPoint.rotation);
+                B.SetOwner(this);
+            }    
+        }
         yield return new WaitForSeconds(.4f);
-        weaponSODatas.GetBulletPrefab(weaponType);
     } 
 
-        
+    public void RemoveCharacterInRange(Character C)
+    {
+        sightCharacter.RemoveCInRange(C);
+    }
+
+    public bool IsDead
+    {
+        get { return isDead; }
+        private set { isDead = value; }
+    }
 }

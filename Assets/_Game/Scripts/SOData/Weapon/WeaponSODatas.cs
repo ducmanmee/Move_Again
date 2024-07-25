@@ -21,6 +21,18 @@ public class WeaponSODatas : ScriptableObject
         return null;
     }
 
+    public WeaponShop GetPrefabShop(WeaponType type)
+    {
+        for (int i = 0; i < weaponDatas.Length; i++)
+        {
+            if (weaponDatas[i].weaponType == type)
+            {
+                return weaponDatas[i].weaponShop;
+            }
+        }
+        return null;
+    }
+
     public int GetWeaponCount() => weaponDatas.Length;
 
     public int GetPriceWeapon(WeaponType type)
@@ -34,33 +46,21 @@ public class WeaponSODatas : ScriptableObject
         }
         return -1;
     }
-
-    public BulletBase GetBulletPrefab(WeaponType type)
-    {
-        for (int i = 0; i < weaponDatas.Length; i++)
-        {
-            if (weaponDatas[i].weaponType == type)
-            {
-                return weaponDatas[i].bulletPrefab;
-            }
-        }
-        return null;
-    }
 }
 
 public enum WeaponType
 {
     None = 0,
-    Arrow = 1,
-    Axe_Red = 2,
-    Axe_Yellow = 3,
-    Boomerang = 4,
-    Candy_Watermelon = 5,
-    Candy_Yellow = 6,
-    Candy_IceCream = 7,
-    Candy_Orange = 8,
-    Hammer = 9,
-    Knife = 10,
-    Uzi = 11,
-    Z = 12
+    Arrow = 10,
+    Axe_Red = 20,
+    Axe_Yellow = 30,
+    Boomerang = 40,
+    Candy_Watermelon = 50,
+    Candy_Yellow = 60,
+    Candy_IceCream = 70,
+    Candy_Orange = 80,
+    Hammer = 90,
+    Knife = 100,
+    Uzi = 110,
+    Z = 120
 }

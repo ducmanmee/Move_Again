@@ -16,7 +16,7 @@ public class AttackState : IState<Enemy>
         t.delayAttackState += Time.deltaTime;
         if(t.delayAttackState > 2f)
         {
-            t.ChangeState(new IdleState());
+            t.ChangeState(Enemy.IdleStateE);
         } 
     }
 

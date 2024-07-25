@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Constain
 {
-    public static float TIMER_DEAD = .8f;
+    public static float TIMER_DEAD = 1.5f;
+    public static float TIMER_WIN = 3f;
     public static string ANIM_IDLE = "idle";
     public static string ANIM_RUN = "run";
     public static string ANIM_ATTACK = "attack";

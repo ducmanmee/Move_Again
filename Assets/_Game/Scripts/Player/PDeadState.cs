@@ -6,8 +6,7 @@ public class PDeadState : IState<Player>
 {
     public void OnEnter(Player t)
     {
-        t.ChangeAnim(Constain.ANIM_DEAD);
-        t.OnDespawn();
+        GameManager.ins.LoseGame();
     }
 
     public void OnExecute(Player t)

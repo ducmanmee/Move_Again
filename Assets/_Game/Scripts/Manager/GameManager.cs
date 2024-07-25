@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum GameState { MainMenu, GamePlay, Finish, Revive, Setting }
+public enum GameState { MainMenu, GamePlay, Win, Revive, Setting, Lose}
 
 public class GameManager : Singleton<GameManager>
 {
@@ -33,8 +33,49 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    public void OnInit()
+    {
+
+    }
+
     private void Start()
     {
         //UIManager.Ins.OpenUI<UIMainMenu>();
     }
+
+    public void RevivalGame()
+    {
+        UIManager.ins.CloseAll();
+        UIManager.ins.OpenUI<CanvasRevival>();
+        ChangeState(GameState.Revive);
+    }
+
+    public void LoseGame()
+    {
+        StartCoroutine(IE_LoseGame());
+    }
+
+    public IEnumerator IE_LoseGame()
+    {
+        yield return Cache.GetWFS(Constain.TIMER_DEAD);
+        ChangeState(GameState.Lose);
+        UIManager.ins.CloseAll();
+        UIManager.ins.OpenUI<CanvasFail>();
+    }
+        
+    public void WinGame()
+    {
+        StartCoroutine(IE_WinGame());
+    }
+
+    public IEnumerator IE_WinGame()
+    {
+        Player.ins.IsWin = true;
+        yield return Cache.GetWFS(Constain.TIMER_WIN);
+        ChangeState(GameState.Win);
+        UIManager.ins.CloseAll();
+        UIManager.ins.OpenUI<CanvasVictory>();
+    }
+
+
 }

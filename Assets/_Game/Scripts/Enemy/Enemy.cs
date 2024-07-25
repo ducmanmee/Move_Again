@@ -11,7 +11,30 @@ public class Enemy : Character
     public float delayAttackState;
     public Vector3 targetMove;
 
-    private IState<Enemy> currentState;
+    public static IdleState IdleStateE = new IdleState();
+    public static AttackState AttackStateE = new AttackState();
+    public static MoveState MoveStateE = new MoveState();
+    public static DeadState DeadStateE = new DeadState();
+
+    private IState<Enemy> currentState; 
+
+    public override void OnDespawn()
+    {
+        PoolingEnemy.ins.EnQueueObj(Constain.TAG_ENEMY, this);
+    }
+
+    public override void OnDeath()
+    {
+        base.OnDeath();
+        ChangeState(Enemy.DeadStateE);
+        LevelManager.ins.RemainingEnemy--;   
+    }
+
+    public IEnumerator Dead()
+    {
+        yield return Cache.GetWFS(Constain.TIMER_DEAD);
+        OnDespawn();
+    }    
 
     private void Update()
     {
@@ -42,7 +65,8 @@ public class Enemy : Character
 
     public override void OnInit()
     {
-        ChangeState(new IdleState());
+        base.OnInit();
+        ChangeState(Enemy.IdleStateE);
     }
 
     public override void Move()
@@ -50,9 +74,9 @@ public class Enemy : Character
         ChangeAnim(Constain.ANIM_RUN);
         transform.LookAt(targetMove);
         agent.SetDestination(targetMove);
-        if (Vector3.Distance(transform.position, targetMove) < .1f)
+        if (Vector3.Distance(transform.position, targetMove) < .2f)
         {
-            ChangeState(new IdleState());
+            ChangeState(Enemy.IdleStateE);
         }
     }
 
@@ -63,7 +87,6 @@ public class Enemy : Character
 
     public override void Attack()
     {
-        base.Attack();
-        Debug.Log("attack");
+        base.Attack();  
     }
 }

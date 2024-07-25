@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Z
   m_EditorClassIdentifier: 
   weaponPrefab: {fileID: 4647765092891386989, guid: 5fd9281dddc01144e9f130e7fb2dc24c, type: 3}
-  weaponType: 12
-  bulletPrefab: {fileID: 7514547859810202644, guid: 78a190a7919a95e4591e820c78ae47f8, type: 3}
+  weaponType: 120
+  weaponShop: {fileID: -4286582058563825500, guid: 6c4052b79991d0e47a08b134e0bfc2da, type: 3}
   weaponName: Z
-  priceWeapon: 4000
+  priceWeapon: 5000
   damage: 0
   speed: 0

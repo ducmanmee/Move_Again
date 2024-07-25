@@ -8,6 +8,9 @@ public class PMoveState : IState<Player>
     {
         t.transform.rotation = Quaternion.LookRotation(t.movementDirection);
         t.ChangeAnim(Constain.ANIM_RUN);
+        t.StopAllCoroutines();
+        t.canAttack = true;
+        t.delayAttackTimer = 0;
     }
 
     public void OnExecute(Player t)

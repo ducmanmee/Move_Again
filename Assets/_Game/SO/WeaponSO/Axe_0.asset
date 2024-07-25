@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Axe_0
   m_EditorClassIdentifier: 
   weaponPrefab: {fileID: 5528813220794784670, guid: 53798f5895b9f7c4ea3164574af3fa89, type: 3}
-  weaponType: 2
-  bulletPrefab: {fileID: -5425954191011468406, guid: d370f5ee682bdcf42bc967790ef7823a, type: 3}
+  weaponType: 20
+  weaponShop: {fileID: 461527416358347256, guid: 443116fd2d144b3499d9f76b0061189d, type: 3}
   weaponName: Axe Red
-  priceWeapon: 500
+  priceWeapon: 700
   damage: 0
   speed: 0

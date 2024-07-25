@@ -4,26 +4,26 @@ using UnityEngine;
 
     public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
-        private static T ins;
+        private static T instance;
 
-        public static T Ins
+        public static T ins
         {
             get
             {
-                if (ins == null)
+                if (instance == null)
                 {
                     // Find singleton
-                    ins = FindObjectOfType<T>();
+                    instance = FindObjectOfType<T>();
 
                     // Create new instance if one doesn't already exist.
-                    if (ins == null)
+                    if (instance == null)
                     {
                         // Need to create a new GameObject to attach the singleton to.
-                        ins = new GameObject(nameof(T)).AddComponent<T>();
+                        instance = new GameObject(nameof(T)).AddComponent<T>();
                     }
 
                 }
-                return ins;
+                return instance;
             }
         }
 

@@ -11,7 +11,10 @@ public class CharacterSight : Singleton<CharacterSight>
         if (other.CompareTag(Constain.TAG_ENEMY) || other.CompareTag(Constain.TAG_PLAYER))
         {
             Character character = Cache.GetCharacter(other);
-            targets.Add(character);
+            if(!character.IsDead)
+            {
+                targets.Add(character);
+            }    
         }
     }
 
@@ -20,7 +23,7 @@ public class CharacterSight : Singleton<CharacterSight>
         if (other.CompareTag(Constain.TAG_ENEMY) || other.CompareTag(Constain.TAG_PLAYER))
         {
             Character character = Cache.GetCharacter(other);
-            targets.Remove(character);
+            RemoveCInRange(character);
         }
     }
 
@@ -42,9 +45,13 @@ public class CharacterSight : Singleton<CharacterSight>
         return nearestTarget;
     }
 
-    private void OnDrawGizmosSelected()
+    public void RemoveCInRange(Character character)
     {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, 4.3f);
+        targets.Remove(character);
     }
+
+    public void ClearCInRange()
+    {
+        targets.Clear();
+    }    
 }

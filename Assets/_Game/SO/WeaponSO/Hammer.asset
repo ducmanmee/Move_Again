@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Hammer
   m_EditorClassIdentifier: 
   weaponPrefab: {fileID: 8325631552732527164, guid: 0f3a2e273b5f88149ae1ac501ca50fa6, type: 3}
-  weaponType: 9
-  bulletPrefab: {fileID: -725724340037868939, guid: 8a47a578a2bad9f45a428d159bcc2d39, type: 3}
+  weaponType: 90
+  weaponShop: {fileID: -3110451761623529328, guid: 41cf4c3ba845155488403fda6881cd4e, type: 3}
   weaponName: Hammer
-  priceWeapon: 2400
+  priceWeapon: 3500
   damage: 0
   speed: 0

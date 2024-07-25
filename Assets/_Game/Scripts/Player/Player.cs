@@ -11,8 +11,15 @@ public class Player : Character
     private IState<Player> currentState;
 
     public Vector3 movementDirection;
-    bool isMoving;
     public bool canAttack;
+
+    public static PIdleState IdleStateP = new PIdleState();
+    public static PAttackState AttackStateP = new PAttackState();
+    public static PMoveState MoveStateP = new PMoveState();
+    public static PDeadState DeadStateP = new PDeadState();
+    public static PWinState WinStateP = new PWinState();
+
+    bool isWin;
 
     private void MakeInstance()
     {
@@ -34,7 +41,6 @@ public class Player : Character
             currentState.OnExecute(this);
         }
         Move();
-
     }
 
     public void ChangeState(IState<Player> newState)
@@ -55,35 +61,68 @@ public class Player : Character
     public override void OnInit()
     {
         base.OnInit();
-        ChangeWeapon(WeaponType.Candy_Yellow);
+        isWin = false;
+        ChangeWeapon((WeaponType)DataManager.ins.dt.idWeapon);
     }
+
+    public override void OnDeath()
+    {
+        base.OnDeath();
+        if (currentState is PDeadState) return;
+        ChangeState(Player.DeadStateP);
+    }
+    
+    public void OnWin()
+    {
+        if (currentState is PWinState) return;
+        ChangeState(Player.WinStateP);
+    }    
 
     public override void Move()
     {
+        if (IsDead)
+        {
+            OnDeath();
+            return;
+        } 
+
+        if(isWin)
+        {
+            OnWin();
+            return;
+        }    
+
         movementDirection = new Vector3(joystick.Horizontal, 0, joystick.Vertical).normalized;
         if (joystick.Horizontal != 0 || joystick.Vertical != 0)
         {
             isMoving = true;
-            ChangeState(new PMoveState());
+            ChangeState(Player.MoveStateP);
         }
         else
         {
             isMoving = false;
             SetTargetCharacter(sightCharacter.GetNearestTarget(this.transform));
+            if(currentState is PMoveState)
+            {
+                ChangeState(Player.IdleStateP);
 
-            if (Target != null)
-            {
-                ChangeState(new PAttackState());
             }
-            else
+            if(Target != null && canAttack)
             {
-                ChangeState(new PIdleState());
-            }  
+                ChangeState(Player.AttackStateP);
+
+            } 
         }
     }
 
     public override void Attack()
     {
         base.Attack();
+    }
+
+    public bool IsWin
+    {
+        get { return isWin; }
+        set { isWin = value; }
     }
 }

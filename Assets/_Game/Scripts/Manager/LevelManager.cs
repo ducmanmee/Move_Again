@@ -13,6 +13,8 @@ public class LevelManager : Singleton<LevelManager>
     public float minDistance = 5f;
     public float maxDistance = 10f;
     public float distanceWithinEnemies;
+    int countEnemyTotal;
+    int remainingEnemy;
     public Player player;
     Vector3 ramdomPos;
     public float distanceEnemyMove;
@@ -28,6 +30,8 @@ public class LevelManager : Singleton<LevelManager>
     //khoi tao trang thai bat dau game
     public void OnInit()
     {
+        countEnemyTotal = 0;
+        remainingEnemy = numberOfEnemy;
         SwarmEnemies();   
         //player.OnInit();
     }
@@ -64,47 +68,63 @@ public class LevelManager : Singleton<LevelManager>
 
     public Vector3 GetPosEnemyMove(Vector3 posEnemy)
     {
-        Vector3 randomDirection = Random.insideUnitSphere.normalized * distanceEnemyMove;
-        randomDirection.y = 0; 
-        return posEnemy + randomDirection;
+        Vector3 randomDirection;
+        Vector3 targetPosition;
+
+        do
+        {
+            randomDirection = Random.insideUnitSphere.normalized * distanceEnemyMove;
+            randomDirection.y = 0;
+
+            targetPosition = posEnemy + randomDirection;
+        } while (!NavMeshChecker.ins.IsPointOnNavMesh(targetPosition));
+
+        return targetPosition;
     }    
 
     public void SwarmEnemies()
     {
-        for (int i = 0; i < numberOfEnemy; i++)
+        for (int i = 0; i < numberOfEnemyOnScreen; i++)
         {
-            bool isSwarm = false;
-            int attempts = 0;
+            SwarmEnemy();
+        }
+    }
 
-            while (!isSwarm && attempts < 1000)
+    public void SwarmEnemy()
+    {
+        if(countEnemyTotal >= numberOfEnemy) return;
+        bool isSwarm = false;
+        int attempts = 0;
+
+        while (!isSwarm && attempts < 1000)
+        {
+            attempts++;
+            Vector3 randomPos = GetRandomPosition() + player.transform.position;
+            isSwarm = true;
+
+            foreach (var enemy in enemiesActive)
             {
-                attempts++;
-                Vector3 randomPos = GetRandomPosition() + player.transform.position;
-                isSwarm = true; 
-
-                foreach (var enemy in enemiesActive)
+                if (Vector3.Distance(randomPos, enemy.transform.position) < distanceWithinEnemies)
                 {
-                    if (Vector3.Distance(randomPos, enemy.transform.position) < distanceWithinEnemies)
-                    {
-                        isSwarm = false;
-                        break;
-                    }
+                    isSwarm = false;
+                    break;
                 }
+            }
 
-                if (isSwarm)
-                {
-                    SwarmEnemy(randomPos);
-                }
+            if (isSwarm)
+            {
+                Enemy E = PoolingEnemy.ins.SpawnFromPool(Constain.TAG_ENEMY);
+                E.gameObject.transform.localPosition = randomPos;
+                E.OnInit();
+                enemiesActive.Add(E);
+                countEnemyTotal++;
             }
         }
     }
 
-    public void SwarmEnemy(Vector3 pos)
+    public int RemainingEnemy
     {
-        Enemy E = PoolingEnemy.ins.SpawnFromPool(Constain.TAG_ENEMY);
-        E.gameObject.transform.localPosition = pos;
-        E.OnInit();
-        enemiesActive.Add(E);
+        get { return remainingEnemy; }
+        set { remainingEnemy = value; }
     }
-        
 }

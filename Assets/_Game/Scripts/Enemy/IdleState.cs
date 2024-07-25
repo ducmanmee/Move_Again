@@ -7,23 +7,23 @@ public class IdleState : IState<Enemy>
     public void OnEnter(Enemy t)
     {
         t.ChangeAnim(Constain.ANIM_IDLE);
-        t.GetCharacterNearest();
         t.delayIdleState = 0f;
         t.delayAttackState = 0f;
     }
 
     public void OnExecute(Enemy t)
     {
+        t.GetCharacterNearest();
         t.delayIdleState += Time.deltaTime;
         if(t.Target != null)
         {
-            t.ChangeState(new AttackState());
+            t.ChangeState(Enemy.AttackStateE);
         } 
         else 
         {
             if (t.delayIdleState > 3f)
             {
-                t.ChangeState(new MoveState());
+                t.ChangeState(Enemy.MoveStateE);
             }
         } 
     }

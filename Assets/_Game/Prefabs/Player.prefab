@@ -603,13 +603,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2682690455710836289}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0.243, y: 1.017, z: 0.718}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2125281746830140354}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &2906714084304808045
 GameObject:
   m_ObjectHideFlags: 0
@@ -1023,10 +1023,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animCharacter: {fileID: 2394551997706281450}
+  isMoving: 0
   sightCharacter: {fileID: 6715965917027680836}
   weaponSODatas: {fileID: 11400000, guid: 3194d552315931b43b8b567e0ef315c9, type: 2}
   weaponHolder: {fileID: 1872091642277345421}
   attackPoint: {fileID: 7229157313127134651}
+  delayAttackTimer: 0
   joystick: {fileID: 0}
   moveSpeed: 5
   movementDirection: {x: 0, y: 0, z: 0}

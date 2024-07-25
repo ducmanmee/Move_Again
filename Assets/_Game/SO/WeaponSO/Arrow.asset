@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Arrow
   m_EditorClassIdentifier: 
   weaponPrefab: {fileID: -1658655729020147044, guid: a335be413803bbe419f27b7e6cd43f85, type: 3}
-  weaponType: 1
-  bulletPrefab: {fileID: 8637393582055244320, guid: 0453d359b336fb547a8f963f5098dbc7, type: 3}
+  weaponType: 10
+  weaponShop: {fileID: 1242171148516219243, guid: 42ae57f0d6477fd45b9cdabd6bc9a985, type: 3}
   weaponName: Arrow
-  priceWeapon: 300
+  priceWeapon: 400
   damage: 0
   speed: 0

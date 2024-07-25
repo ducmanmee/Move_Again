@@ -6,8 +6,7 @@ public class DeadState : IState<Enemy>
 {
     public void OnEnter(Enemy t)
     {
-        t.ChangeAnim(Constain.ANIM_DEAD);
-        t.OnDespawn();
+        t.StartCoroutine(t.Dead());
     }
 
     public void OnExecute(Enemy t)

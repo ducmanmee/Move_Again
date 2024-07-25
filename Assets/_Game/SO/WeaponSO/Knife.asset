@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 740df78c05ea19b42bf1185364b10620, type: 3}
-  m_Name: Knife
+  m_Name: knife
   m_EditorClassIdentifier: 
   weaponPrefab: {fileID: -1700048521003202709, guid: 50584a4cde28bdc479144bd5a4239cc8, type: 3}
-  weaponType: 10
-  bulletPrefab: {fileID: -8583679357898114083, guid: 1cee52fb7aa7a2c429dac861d3e73c89, type: 3}
+  weaponType: 100
+  weaponShop: {fileID: 7121822655606336367, guid: 6f4f4cb01de1f464787fb89cfa8e4f0d, type: 3}
   weaponName: Knife
-  priceWeapon: 2700
+  priceWeapon: 4000
   damage: 0
   speed: 0

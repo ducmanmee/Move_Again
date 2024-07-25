@@ -6,7 +6,7 @@ public class MoveState : IState<Enemy>
 {
     public void OnEnter(Enemy t)
     {
-        t.targetMove = LevelManager.Ins.GetPosEnemyMove(t.transform.position);
+        t.targetMove = LevelManager.ins.GetPosEnemyMove(t.transform.position);
     }
 
     public void OnExecute(Enemy t)
