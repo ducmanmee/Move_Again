@@ -16,7 +16,7 @@ public class Enemy : Character
     public static MoveState MoveStateE = new MoveState();
     public static DeadState DeadStateE = new DeadState();
 
-    private IState<Enemy> currentState; 
+    private IState<Enemy> currentState;
 
     public override void OnDespawn()
     {
@@ -66,15 +66,18 @@ public class Enemy : Character
     public override void OnInit()
     {
         base.OnInit();
+        NameCharacter = NameUtility.GetRandomName();
+        ActiveTargetIndicator();
         ChangeState(Enemy.IdleStateE);
-    }
+    }  
 
     public override void Move()
     {
+        if(!GameManager.IsState(GameState.GamePlay)) return;
         ChangeAnim(Constain.ANIM_RUN);
-        transform.LookAt(targetMove);
+        CharacterTF().LookAt(targetMove);
         agent.SetDestination(targetMove);
-        if (Vector3.Distance(transform.position, targetMove) < .2f)
+        if (Vector3.Distance(CharacterTF().position, targetMove) < .2f)
         {
             ChangeState(Enemy.IdleStateE);
         }
@@ -82,7 +85,7 @@ public class Enemy : Character
 
     public void GetCharacterNearest()
     {
-        SetTargetCharacter(sightCharacter.GetNearestTarget(this.transform));
+        SetTargetCharacter(sightCharacter.GetNearestTarget(CharacterTF()));
     }
 
     public override void Attack()

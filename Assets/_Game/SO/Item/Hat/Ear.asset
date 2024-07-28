@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b16eabec704f5cc4189efc490ece30c5, type: 3}
+  m_Name: Ear
+  m_EditorClassIdentifier: 
+  itemName: Ear
+  itemPrice: 1000
+  itemType: 2
+  hatPrefab: {fileID: -3495863060358051248, guid: 9ebd3b3e55ae4ca4fb01c7ae8df614ff, type: 3}
+  hatType: 40

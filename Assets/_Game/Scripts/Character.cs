@@ -6,35 +6,55 @@ public class Character : MonoBehaviour
 {
     private string currentAnim;
     public Animator animCharacter;
-
+    Transform characterTF;
     bool isDead;
     
     public bool isMoving;
 
+    int score;
+    TargetIndicator targetIndicator;
+
 
     private Character target;
-    public Character Target => target;
+    
     public CharacterSight sightCharacter;
 
+    //Weapon
     [SerializeField] WeaponSODatas weaponSODatas;
     WeaponBase curWeapon;
     WeaponType curWeaponType;
     [SerializeField] Transform weaponHolder;
 
+
+    //Hat
+    [SerializeField] HatSODatas hatSODatas;
+    HatBase curHat;
+    HatType curHatType;
+    [SerializeField] Transform hatHolder;
+
+    //Pant
+    [SerializeField] PantSODatas pantSODatas;
+    [SerializeField] SkinnedMeshRenderer pantMaterialCharacter;
+    PantType curPantType;
+
+    //Shield
+    [SerializeField] ShieldSODatas shieldSODatas;
+    ShieldBase curShield;
+    ShieldType curShieldType;
+    [SerializeField] Transform shieldHolder;
+
+
     [SerializeField] Transform attackPoint;
 
     public float delayAttackTimer;
-    float attackRange = 5.5f;
-    public float AttackRange() => attackRange;
+    float attackRange = 6.5f;
 
-    private void Start()
-    {
-        OnInit();
-    }
+    string nameCharacter;
 
     public virtual void OnInit() 
     {
         isDead = false;
+        characterTF = transform;
         sightCharacter.ClearCInRange();
     }
     public virtual void OnDespawn()
@@ -73,6 +93,32 @@ public class Character : MonoBehaviour
         curWeapon = Instantiate(weaponSODatas.GetPrefab(weaponType), weaponHolder);
     }
 
+    public void ChangeHat(HatType hatType)
+    {
+        curHatType = hatType;
+        if(curHat != null)
+        {
+            Destroy(curHat.gameObject);
+        }
+        curHat = Instantiate(hatSODatas.GetPrefab(hatType), hatHolder);
+    }  
+    
+    public void ChangePant(PantType pantType)
+    {
+        curPantType = pantType;
+        pantMaterialCharacter.material = pantSODatas.GetMat(pantType);
+    }
+
+    public void ChangeShield(ShieldType shieldType)
+    {
+        curShieldType = shieldType;
+        if (curShield != null)
+        {
+            Destroy(curShield.gameObject);
+        }
+        curShield = Instantiate(shieldSODatas.GetPrefab(shieldType), shieldHolder);
+    }
+
     public virtual void OnHit(int damage)
     {
 
@@ -81,6 +127,7 @@ public class Character : MonoBehaviour
     public virtual void OnDeath()
     {
         isDead = true;
+        targetIndicator.OnDespawn();
         ChangeAnim(Constain.ANIM_DEAD);
     }
 
@@ -101,7 +148,7 @@ public class Character : MonoBehaviour
             sightCharacter.RemoveCInRange(target);
             return;
         }    
-        transform.LookAt(target.transform);
+        characterTF.LookAt(target.characterTF);
         ChangeAnim(Constain.ANIM_ATTACK);
         StartCoroutine(ThrowWeapon(curWeaponType));
     }
@@ -113,7 +160,7 @@ public class Character : MonoBehaviour
         {
             if(Target != null)
             {
-                transform.LookAt(target.transform);
+                characterTF.LookAt(target.characterTF);
                 BulletBase B = SimplePool.Spawn<BulletBase>((PoolType)DataManager.ins.dt.idWeapon, attackPoint.position, attackPoint.rotation);
                 B.SetOwner(this);
             }    
@@ -126,9 +173,38 @@ public class Character : MonoBehaviour
         sightCharacter.RemoveCInRange(C);
     }
 
+    public void SetRotation(Vector3 eulerAngles)
+    {
+        Quaternion newRotation = Quaternion.Euler(eulerAngles);
+        characterTF.rotation = newRotation;
+    }
+
+    public void ActiveTargetIndicator()
+    {
+        targetIndicator = PoolingTargetIndicator.ins.SpawnFromPool(Constain.TAG_TARGET);
+        targetIndicator.SetTarget(characterTF);
+        targetIndicator.SetName(NameCharacter);
+    }
+
+    public void UpScore(int index)
+    {
+        score += index;
+        targetIndicator.SetScore(score);
+    }    
+
     public bool IsDead
     {
         get { return isDead; }
         private set { isDead = value; }
     }
+
+    public string NameCharacter
+    {
+        get { return nameCharacter; }
+        set { nameCharacter = value; }
+    }
+
+    public Transform CharacterTF() => characterTF;
+    public Character Target => target;
+    public float AttackRange() => attackRange;
 }

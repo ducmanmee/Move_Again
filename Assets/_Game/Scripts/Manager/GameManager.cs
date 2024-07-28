@@ -40,7 +40,7 @@ public class GameManager : Singleton<GameManager>
 
     private void Start()
     {
-        //UIManager.Ins.OpenUI<UIMainMenu>();
+        UIManager.ins.OpenUI<CanvasMainmenu>();
     }
 
     public void RevivalGame()

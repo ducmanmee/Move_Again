@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec0f036384270fc438031ccbcd359059, type: 3}
+  m_Name: America_Shield
+  m_EditorClassIdentifier: 
+  itemName: America Shield
+  itemPrice: 1000
+  itemType: 3
+  shieldPrefab: {fileID: -5802127671444787751, guid: 5e9f061bb0aa8bd41a4be2b19f63a8b8, type: 3}
+  shieldType: 10

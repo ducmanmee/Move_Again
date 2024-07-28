@@ -34,7 +34,7 @@ public class CharacterSight : Singleton<CharacterSight>
 
         foreach (Character target in targets)
         {
-            float distance = Vector3.Distance(TF.position, target.transform.position);
+            float distance = Vector3.Distance(TF.position, target.CharacterTF().position);
             if (distance < minDistance)
             {
                 minDistance = distance;

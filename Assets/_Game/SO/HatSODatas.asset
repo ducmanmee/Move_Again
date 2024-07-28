@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d154de1f2ddf82b4d81308c3de77b97f, type: 3}
+  m_Name: HatSODatas
+  m_EditorClassIdentifier: 
+  hatDatas:
+  - {fileID: 11400000, guid: c433856baaa60854990e40dadcdbe390, type: 2}
+  - {fileID: 11400000, guid: 4b34de0bba5113c4eaac622fad8f4931, type: 2}
+  - {fileID: 11400000, guid: eaba4f29da69cc2479896c4f35275824, type: 2}
+  - {fileID: 11400000, guid: 53008c05b5f377847b3bdb5f91c4adb5, type: 2}
+  - {fileID: 11400000, guid: 79835888c0db97d408441189870794c6, type: 2}
+  - {fileID: 11400000, guid: 1227d4d9a79d2ef4e8e3e3c385d94df6, type: 2}
+  - {fileID: 11400000, guid: 8516662a5b0170343b2a73b39e130a09, type: 2}
+  - {fileID: 11400000, guid: 75f1bf63f90693844a9d70f70d66364e, type: 2}
+  - {fileID: 11400000, guid: 80a6f9b43bb65334ebdd1ab1baae2194, type: 2}
+  - {fileID: 11400000, guid: db90b5acc067f7b4ab5ee2ab7c274561, type: 2}

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class LevelManager : Singleton<LevelManager>
 {
@@ -99,28 +100,34 @@ public class LevelManager : Singleton<LevelManager>
         while (!isSwarm && attempts < 1000)
         {
             attempts++;
-            Vector3 randomPos = GetRandomPosition() + player.transform.position;
+            Vector3 randomPos = GetRandomPosition() + player.CharacterTF().position;
             isSwarm = true;
 
-            foreach (var enemy in enemiesActive)
+            for(int i=0; i < enemiesActive.Count; i++)
             {
-                if (Vector3.Distance(randomPos, enemy.transform.position) < distanceWithinEnemies)
+                if(Vector3.Distance(randomPos, enemiesActive[i].CharacterTF().position) < distanceWithinEnemies)
                 {
                     isSwarm = false;
                     break;
-                }
-            }
+                }    
+            }    
 
             if (isSwarm)
             {
-                Enemy E = PoolingEnemy.ins.SpawnFromPool(Constain.TAG_ENEMY);
-                E.gameObject.transform.localPosition = randomPos;
-                E.OnInit();
-                enemiesActive.Add(E);
-                countEnemyTotal++;
+                SwarmE(randomPos);
             }
         }
     }
+
+    public void SwarmE(Vector3 pos)
+    {
+        Enemy E = PoolingEnemy.ins.SpawnFromPool(Constain.TAG_ENEMY);
+        E.OnInit();
+        E.CharacterTF().localPosition = pos;
+        enemiesActive.Add(E);
+        countEnemyTotal++;
+    }
+        
 
     public int RemainingEnemy
     {

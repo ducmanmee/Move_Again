@@ -6,7 +6,7 @@ public class PMoveState : IState<Player>
 {
     public void OnEnter(Player t)
     {
-        t.transform.rotation = Quaternion.LookRotation(t.movementDirection);
+        t.CharacterTF().rotation = Quaternion.LookRotation(t.movementDirection);
         t.ChangeAnim(Constain.ANIM_RUN);
         t.StopAllCoroutines();
         t.canAttack = true;
@@ -15,7 +15,7 @@ public class PMoveState : IState<Player>
 
     public void OnExecute(Player t)
     {
-        t.transform.Translate(t.movementDirection * t.moveSpeed * Time.deltaTime, Space.World);
+        t.CharacterTF().Translate(t.movementDirection * t.moveSpeed * Time.deltaTime, Space.World);
     }
 
     public void OnExit(Player t)

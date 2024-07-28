@@ -9,7 +9,7 @@ public class PIdleState : IState<Player>
         t.ChangeAnim(Constain.ANIM_IDLE);
         if(t.Target != null)
         {
-            t.transform.LookAt(t.Target.transform);
+            t.CharacterTF().LookAt(t.Target.CharacterTF());
         }    
     }
 

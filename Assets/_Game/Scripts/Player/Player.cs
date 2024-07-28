@@ -34,6 +34,11 @@ public class Player : Character
         MakeInstance();
     }
 
+    private void Start()
+    {
+        OnInit();
+    }
+
     private void Update()
     {
         if (currentState != null)
@@ -62,7 +67,12 @@ public class Player : Character
     {
         base.OnInit();
         isWin = false;
+        NameCharacter = "Helo";
+        ActiveTargetIndicator();
         ChangeWeapon((WeaponType)DataManager.ins.dt.idWeapon);
+        ChangeHat((HatType)DataManager.ins.dt.idHat);
+        ChangePant((PantType)DataManager.ins.dt.idPant);
+        ChangeShield((ShieldType)DataManager.ins.dt.idShield);
     }
 
     public override void OnDeath()
@@ -101,7 +111,7 @@ public class Player : Character
         else
         {
             isMoving = false;
-            SetTargetCharacter(sightCharacter.GetNearestTarget(this.transform));
+            SetTargetCharacter(sightCharacter.GetNearestTarget(CharacterTF()));
             if(currentState is PMoveState)
             {
                 ChangeState(Player.IdleStateP);

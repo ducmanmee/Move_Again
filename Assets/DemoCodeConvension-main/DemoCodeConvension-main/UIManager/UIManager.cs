@@ -36,6 +36,19 @@ public class UIManager : Singleton<UIManager>
     //canvas chua dung cac canvas con, nen la mot canvas - root de chua cac canvas nay
     public Transform CanvasParentTF;
 
+    private void Awake()
+    {
+        Setup();
+    }
+
+    public void Setup()
+    {
+        for (int i = 0; i < uiResources.Length; i++)
+        {
+            uiCanvasPrefab.Add(uiResources[i].GetType(), uiResources[i]);
+        }
+    }
+
     #region Canvas
 
     //open UI

@@ -65,9 +65,9 @@ public class PlayerData
     public int idWeapon = 10;
     public int idSkin = 0;
     public int idPant = 0;
-    public int idHat = 20;
+    public int idHat = 10;
     public int idSetSkin = 0;
-    public int idKhien = 20;
+    public int idShield = 20;
 
     public bool[] status_Weapon = { true, false, false, false, false, false, false, false, false, false, false, false};
     public bool[] status_Pant = {true, false, false, false, false, false, false, false, false, false};

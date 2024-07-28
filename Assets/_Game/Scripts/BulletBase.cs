@@ -8,12 +8,18 @@ public class BulletBase : GameUnit
 {
     float speed = 5.5f;
     Character owner;
+    Transform bulletTF;
     [SerializeField] private float duration = 1f;
+
+    private void Awake()
+    {
+        bulletTF = transform;
+    }
 
     private void Update()
     {
-        transform.Translate(Vector3.up * speed * Time.deltaTime);
-        if(Vector3.Distance(owner.gameObject.transform.position, transform.position) > owner.AttackRange())
+        bulletTF.Translate(Vector3.up * speed * Time.deltaTime);
+        if(Vector3.Distance(owner.CharacterTF().position, bulletTF.position) > owner.AttackRange())
         {
             OnDespawn();
         }    
@@ -44,6 +50,7 @@ public class BulletBase : GameUnit
                 if(C.IsDead) return;
                 C.OnDeath();
                 owner.RemoveCharacterInRange(C);
+                owner.UpScore(1);
                 if(C is Enemy)
                 {
                     if (LevelManager.ins.RemainingEnemy == 0)
@@ -51,7 +58,8 @@ public class BulletBase : GameUnit
                         GameManager.ins.WinGame();
                     }
                     LevelManager.ins.SwarmEnemy();
-                }    
+                } 
+                CanvasGameplay.ins.SetNumberText(LevelManager.ins.RemainingEnemy+ 1);
                 OnDespawn();
             }
         }    

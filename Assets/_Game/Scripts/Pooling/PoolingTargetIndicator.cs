@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PoolingBullet : MonoBehaviour
+public class PoolingTargetIndicator : MonoBehaviour
 {
     #region Singleton
-    public static PoolingBullet ins;
+    public static PoolingTargetIndicator ins;
     public void Awake()
     {
         ins = this;
@@ -16,24 +16,24 @@ public class PoolingBullet : MonoBehaviour
     public class Pool
     {
         public string tag;
-        public BulletBase prefab;
+        public TargetIndicator prefab;
         public int size;
     }
 
     public List<Pool> pools;
-    public Dictionary<string, Queue<BulletBase>> poolDictionary;
+    public Dictionary<string, Queue<TargetIndicator>> poolDictionary;
 
     void SetUp()
     {
-        poolDictionary = new Dictionary<string, Queue<BulletBase>>();
+        poolDictionary = new Dictionary<string, Queue<TargetIndicator>>();
 
         foreach (Pool p in pools)
         {
-            Queue<BulletBase> objectPool = new Queue<BulletBase>();
+            Queue<TargetIndicator> objectPool = new Queue<TargetIndicator>();
 
             for (int i = 0; i < p.size; i++)
             {
-                BulletBase obj = Instantiate(p.prefab, transform);
+                TargetIndicator obj = Instantiate(p.prefab, transform);
                 obj.gameObject.SetActive(false);
                 objectPool.Enqueue(obj);
             }
@@ -42,10 +42,10 @@ public class PoolingBullet : MonoBehaviour
         }
     }
 
-    BulletBase preb;
-    public BulletBase SpawnFromPool(string tag)
+    TargetIndicator preb;
+    public TargetIndicator SpawnFromPool(string tag)
     {
-        BulletBase objToSpawn;
+        TargetIndicator objToSpawn;
         try
         {
             objToSpawn = poolDictionary[tag].Dequeue();
@@ -61,7 +61,7 @@ public class PoolingBullet : MonoBehaviour
                 }
             }
 
-            BulletBase obj = Instantiate(preb, transform);
+            TargetIndicator obj = Instantiate(preb, transform);
             obj.gameObject.SetActive(false);
             poolDictionary[tag].Enqueue(obj);
 
@@ -72,7 +72,7 @@ public class PoolingBullet : MonoBehaviour
         return objToSpawn;
     }
 
-    public void EnQueueObj(string tag, BulletBase objToEnqueue)
+    public void EnQueueObj(string tag, TargetIndicator objToEnqueue)
     {
         poolDictionary[tag].Enqueue(objToEnqueue);
         objToEnqueue.gameObject.SetActive(false);

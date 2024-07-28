@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b16eabec704f5cc4189efc490ece30c5, type: 3}
+  m_Name: Rau
+  m_EditorClassIdentifier: 
+  itemName: Rau
+  itemPrice: 2500
+  itemType: 2
+  hatPrefab: {fileID: -1169073304496062920, guid: 32b9e8c4084e10243ac7db8de606da2a, type: 3}
+  hatType: 100
