@@ -19,6 +19,18 @@ public class PantSODatas : ScriptableObject
         }
         return null;
     }
+
+    public int GetPrice(PantType pantType)
+    {
+        for (int i = 0; i < pantDatas.Length; i++)
+        {
+            if (pantDatas[i].pantType == pantType)
+            {
+                return pantDatas[i].itemPrice;
+            }
+        }
+        return -1;
+    }    
 }
 public enum PantType
 {

@@ -19,6 +19,18 @@ public class HatSODatas : ScriptableObject
         }
         return null;
     }
+
+    public int GetPrice(HatType type)
+    {
+        for (int i = 0; i < hatDatas.Length; i++)
+        {
+            if (hatDatas[i].hatType == type)
+            {
+                return hatDatas[i].itemPrice;
+            }
+        }
+        return -1;
+    }
 }
 public enum HatType
 {

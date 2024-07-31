@@ -10,6 +10,7 @@ public class ItemsSO : ScriptableObject
     public string itemName;
     public int itemPrice;
     public ItemType itemType;
+    public StateItemType state;
 }
 
 public enum ItemType
@@ -19,4 +20,10 @@ public enum ItemType
     Hat,
     Shield,
     FulSkin
+}
+
+public enum StateItemType
+{
+    buy_yet = 0,
+    buy = 1
 }

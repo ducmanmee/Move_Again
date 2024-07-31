@@ -25,29 +25,27 @@ public class LevelManager : Singleton<LevelManager>
     public void Start()
     {
         OnLoadLevel(0);
-        OnInit();
+        //OnInit();
     }
 
     //khoi tao trang thai bat dau game
     public void OnInit()
     {
+        player.OnInit();
         countEnemyTotal = 0;
         remainingEnemy = numberOfEnemy;
         SwarmEnemies();   
-        //player.OnInit();
     }
 
     //reset trang thai khi ket thuc game
     public void OnReset()
     {
-        //player.OnDespawn();
-        //for (int i = 0; i < bots.Count; i++)
-        //{
-        //    bots[i].OnDespawn();
-        //}
-
-        //bots.Clear();
-        //SimplePool.CollectAll();
+        player.OnDespawn();
+        for (int i = 0; i < enemiesActive.Count; i++)
+        {
+            enemiesActive[i].OnDespawn();
+        }
+        enemiesActive.Clear();
     }
 
     //tao prefab level moi
@@ -96,11 +94,11 @@ public class LevelManager : Singleton<LevelManager>
         if(countEnemyTotal >= numberOfEnemy) return;
         bool isSwarm = false;
         int attempts = 0;
-
         while (!isSwarm && attempts < 1000)
         {
             attempts++;
             Vector3 randomPos = GetRandomPosition() + player.CharacterTF().position;
+            Debug.Log(PoolingEnemy.ins);
             isSwarm = true;
 
             for(int i=0; i < enemiesActive.Count; i++)

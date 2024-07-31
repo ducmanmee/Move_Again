@@ -46,6 +46,18 @@ public class WeaponSODatas : ScriptableObject
         }
         return -1;
     }
+
+    public WeaponType GetWeaponType(int index)
+    {
+        for( int i = 0; i < weaponDatas.Length; i++)
+        {
+            if(i == index)
+            {
+                return weaponDatas[i].weaponType;
+            }    
+        }   
+        return WeaponType.None;
+    }
 }
 
 public enum WeaponType

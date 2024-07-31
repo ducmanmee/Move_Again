@@ -9,7 +9,6 @@ public class BulletBase : GameUnit
     float speed = 5.5f;
     Character owner;
     Transform bulletTF;
-    [SerializeField] private float duration = 1f;
 
     private void Awake()
     {

@@ -19,6 +19,18 @@ public class ShieldSODatas : ScriptableObject
         }
         return null;
     }
+
+    public int GetPrice(ShieldType type)
+    {
+        for (int i = 0; i < shieldDatas.Length; i++)
+        {
+            if (shieldDatas[i].shieldType == type)
+            {
+                return shieldDatas[i].itemPrice;
+            }
+        }
+        return -1;
+    }
 }
 public enum ShieldType
 {

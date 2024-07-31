@@ -45,6 +45,7 @@ public class Player : Character
         {
             currentState.OnExecute(this);
         }
+        HideTargetIndicator();
         Move();
     }
 
@@ -66,13 +67,22 @@ public class Player : Character
     public override void OnInit()
     {
         base.OnInit();
+        this.gameObject.SetActive(true);
+        ChangeState(Player.IdleStateP);
+        ActiveTargetIndicator();
         isWin = false;
         NameCharacter = "Helo";
-        ActiveTargetIndicator();
-        ChangeWeapon((WeaponType)DataManager.ins.dt.idWeapon);
+        CurWeaponType = (WeaponType)DataManager.ins.dt.idWeapon;
+        ChangeWeapon(CurWeaponType);
         ChangeHat((HatType)DataManager.ins.dt.idHat);
         ChangePant((PantType)DataManager.ins.dt.idPant);
         ChangeShield((ShieldType)DataManager.ins.dt.idShield);
+    }
+
+    public override void OnDespawn()
+    {
+        base.OnDespawn();
+        targetIndicator.OnDespawn();
     }
 
     public override void OnDeath()

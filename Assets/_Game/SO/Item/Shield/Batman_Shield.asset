@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec0f036384270fc438031ccbcd359059, type: 3}
   m_Name: Batman_Shield
   m_EditorClassIdentifier: 
-  itemName: America Shield
-  itemPrice: 1000
+  itemName: Batman Shield
+  itemPrice: 2000
   itemType: 3
-  shieldPrefab: {fileID: -5802127671444787751, guid: 5e9f061bb0aa8bd41a4be2b19f63a8b8, type: 3}
-  shieldType: 10
+  shieldPrefab: {fileID: -6279538156503288835, guid: d2e753aaf3c79be4d9ae92530e8e0096, type: 3}
+  shieldType: 20

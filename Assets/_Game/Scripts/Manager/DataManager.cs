@@ -69,11 +69,11 @@ public class PlayerData
     public int idSetSkin = 0;
     public int idShield = 20;
 
-    public bool[] status_Weapon = { true, false, false, false, false, false, false, false, false, false, false, false};
-    public bool[] status_Pant = {true, false, false, false, false, false, false, false, false, false};
-    public bool[] status_Hat = {true, false, false, false, false, false, false, false, false, false, false};
-    public bool[] status_SetSkin = {true, false, false, false, false, false};
-    public bool[] status_Khien = {true, false, false};
+    public int[] status_Weapon = { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    public int[] status_Pant = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    public int[] status_Hat = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    public int[] status_SetSkin = {0, 0, 0, 0, 0, 0};
+    public int[] status_Khien = {0, 0};
 
 
 }

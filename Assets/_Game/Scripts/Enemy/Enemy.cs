@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,6 +22,7 @@ public class Enemy : Character
     public override void OnDespawn()
     {
         PoolingEnemy.ins.EnQueueObj(Constain.TAG_ENEMY, this);
+        targetIndicator.OnDespawn();
     }
 
     public override void OnDeath()
@@ -42,10 +44,7 @@ public class Enemy : Character
         {
             currentState.OnExecute(this);
         }
-        /*ChangeAnim(Constain.ANIM_RUN);
-
-        agent.SetDestination(Player.ins.transform.position);
-        transform.LookAt(Player.ins.transform.position);*/
+        HideTargetIndicator();
     }
 
     public void ChangeState(IState<Enemy> newState)
@@ -66,6 +65,11 @@ public class Enemy : Character
     public override void OnInit()
     {
         base.OnInit();
+        CurWeaponType = GetRandomEnumValue<WeaponType>();
+        ChangeWeapon(CurWeaponType);
+        ChangePant(GetRandomEnumValue<PantType>());
+        ChangeHat(GetRandomEnumValue<HatType>());
+        ChangeShield(GetRandomEnumValue<ShieldType>());
         NameCharacter = NameUtility.GetRandomName();
         ActiveTargetIndicator();
         ChangeState(Enemy.IdleStateE);
@@ -91,5 +95,11 @@ public class Enemy : Character
     public override void Attack()
     {
         base.Attack();  
+    }
+
+    T GetRandomEnumValue<T>() where T : Enum
+    {
+        Array values = Enum.GetValues(typeof(T));
+        return (T)values.GetValue(UnityEngine.Random.Range(0, values.Length));
     }
 }

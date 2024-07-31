@@ -14,7 +14,7 @@ public class Constain
     public static string ANIM_ATTACK = "attack";
     public static string ANIM_ULTI = "ulti";
     public static string ANIM_DANCEWIN = "dancewin";
-    public static string ANIM_DANCE = "dance_skin";
+    public static string ANIM_DANCE = "danceshop";
     public static string ANIM_DEAD = "dead";
 
 

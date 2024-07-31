@@ -33,5 +33,10 @@ public class CanvasGameplay : UICanvas
     public void SetNumberText(int index)
     {
         numberOfEnemyTxt.text = index.ToString();
+    }  
+    
+    public void SettingBtn()
+    {
+        UIManager.ins.OpenUI<CanvasSetting>();
     }    
 }
